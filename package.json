@@ -1,0 +1,50 @@
+{
+  "name": "excel-summary",
+  "version": "1.0.0",
+  "description": "This is guide for electron and react",
+  "author": "kyh",
+  "license": "MIT",
+  "main": "./dist/main.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run bundle-renderer\" \"npm run bundle-electron\" \"npm run electron\"",
+    "build": "webpack && webpack --config ./.webpack/webpack.config.electron.ts && npm run make",
+    "bundle-renderer": "webpack serve",
+    "bundle-electron": "webpack --config ./.webpack/webpack.config.electron.ts -w",
+    "electron": "nodemon -i ./src/renderer/ -i ./src/types/ -w ./src/ -e ts -x electron ./dist/main.js",
+    "make": "tsc --project tsconfig.forge.json && electron-forge make",
+    "start": "electron-forge start",
+    "package": "electron-forge package"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.2",
+    "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.67",
+    "@electron-forge/maker-deb": "^6.0.0-beta.67",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.67",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.67",
+    "@electron-forge/maker-zip": "^6.0.0-beta.67",
+    "@types/node": "^18.8.3",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@types/styled-components": "^5.1.26",
+    "concurrently": "^7.4.0",
+    "cross-env": "^7.0.3",
+    "electron": "^21.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "nodemon": "^2.0.20",
+    "ts-loader": "^9.4.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "config": {
+    "forge": "./dist/forge.config.js"
+  }
+}

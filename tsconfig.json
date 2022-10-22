@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    // 컴파일 파일의 버전
+    "target": "ESNext",
+    // 컴파일 모듈시스템 정의
+    "module": "ESNext",
+    // 타입 라이브러리 사용 목록
+    "lib": [ "ESNext", "DOM", "DOM.Iterable" ],
+    // 엄격모드
+    "strict": true,
+    // 파일경로 등을 컴파일러가 검색할 수 있게하는 모듈 해석 방법
+    "moduleResolution": "Node",
+    // 컴파일 되기전 원본소스와 맵핑
+    "sourceMap": true,
+    // CommonJS 모듈을 es6모듈 사양처럼 쓸수있게하는 옵션
+    "esModuleInterop": true,
+    // jsx 확장자 파일에 대한 컴파일 방식 설정
+    "jsx": "react",
+    // 타입라이브러리 위치 설정
+    "typeRoots": [ "node_modules/@types", "src/types" ],
+    // 경로 별명 설정
+    "baseUrl": ".",
+    "paths": {
+      "@pages/*": [ "src/renderer/pages/*" ]
+    }
+  },
+  // ts-node 옵션
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}

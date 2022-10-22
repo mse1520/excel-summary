@@ -1,0 +1,37 @@
+1. typescript
+npm i -D typescript ts-node tsconfig-paths @types/node @types/react @types/react-dom @types/styled-components
+typescript란 javascript에 타입을 추가한 확장 언어입니다
+  - 'typescript'는 타입스크립트언어를 컴파일하기위한 필수 패키지입니다
+  - '@types/node'는 node 환경에서의 타입정의 패키지입니다
+  - '@types/react'는 react의 타입정의 패키지입니다
+  - '@types/react-dom'는 react-dom의 타입정의 패키지입니다
+  - '@types/styled-components'는 styled-components의 타입정의 패키지입니다
+
+2. react
+react는 사용자 인터페이스를 만들기 위한 패키지입니다
+npm i react react-dom react-router-dom styled-components
+
+3. electron
+npm i -D electron @electron-forge/cli
+electron은 데스크탑 앱을 만드는 프레임워크입니다
+  - 'electron'은 데스크탑 앱을 만드는 프레임워크 패키지입니다
+  - '@electron-forge/cli'은 앱을 배포하는데 필요한 패키지입니다
+
+4. webpack 설치하기
+npm i -D webpack webpack-cli
+webpack은 여러파일을 하나의 파일로 합쳐주는 번들러입니다
+  - 'webpack'는 webpack 기능을 사용시 필요한 필수 기능들의 집합입니다
+  - 'webpack-cli'는 webpack-cli을 커맨드라인으로 사용하기 위함입니다
+  - 'ts-loader'는 webpack이 typescript 문법을 해석하기위한 확장 패키지입니다
+
+5. webpack 설정 추가 기능
+npm i -D ts-loader html-webpack-plugin webpack-dev-server
+  - 'ts-loader'는 webpack이 typescript 문법을 해석하기위한 확장 패키지입니다
+  - 'html-webpack-plugin'은 베이스가 되는 html파일과 함께 번들링을 실행합니다
+  - 'webpack-dev-server'은 번들링 파일을 만들지 않고 개발서버 상태로 코드작성시 변경상태를 바로 반영합니다
+
+6. 그외 패키지
+npm i -D nodemon concurrently cross-env
+  - 'nodemon'은 파일의 변경사항을 감지하여 특정명령어 등을 실행해주는 자동화 패키지입니다
+  - 'concurrently'은 특정 명령어들을 동시 실행하도록 해주는 패키지입니다
+  - 'cross-env'는 서로다른 환경에서 환경변수 설정 명령어를 통일 시켜주는 패키지입니다
