@@ -1,8 +1,11 @@
 import path from 'path';
 import { app, BrowserWindow, nativeTheme } from 'electron';
+import installer from 'electron-squirrel-startup';
 import api from './api';
 
 const IS_DEV = process.env.NODE_ENV === 'development';
+
+if (installer) app.quit();
 
 function createWindow() {
   nativeTheme.themeSource = 'dark';
