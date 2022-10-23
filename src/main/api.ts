@@ -33,7 +33,7 @@ api.post('export-excel', (bufs: Record<string, any>[]) => {
     dialog.showSaveDialog,
     (res: Electron.SaveDialogReturnValue) => res.filePath,
     (path: string) => path ? path : Promise.reject('filePath is not found!!!'),
-    _.tap((path: string) => XLSX.writeFile(workbook, path))
+    _.tap((path: string) => XLSX.writeFile(workbook, path, { compression: true }))
   );
 });
 
