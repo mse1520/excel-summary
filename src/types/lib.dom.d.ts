@@ -1,7 +1,6 @@
 interface Window {
   readonly api: {
-    get: (command: string, data?: { [key: string]: any }) => Promise<any>;
-    post: (command: string, data?: { [key: string]: any }) => Promise<any>;
+    get: <T = any, R = any>(command: string, data?: T) => Promise<R>;
+    post: <T = any, R = any>(command: string, data?: T) => Promise<R>;
   };
 }
-

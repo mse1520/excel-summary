@@ -1,6 +1,3 @@
-import { contextBridge, ipcRenderer } from 'electron';
+import { apiBridge } from '@lib/ipcApi';
 
-contextBridge.exposeInMainWorld('api', {
-  get: (command: string, data?: { [key: string]: any }) => ipcRenderer.invoke('get', command, data),
-  post: (command: string, data?: { [key: string]: any }) => ipcRenderer.invoke('post', command, data)
-});
+apiBridge();

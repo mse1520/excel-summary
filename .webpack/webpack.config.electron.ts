@@ -4,10 +4,9 @@ import { Configuration as WebpackConfiguration, EnvironmentPlugin } from 'webpac
 
 const IS_DEV = process.env.NODE_ENV === 'development';
 
-function createConfig(target: string): WebpackConfiguration {
-  return {
+function createConfig(predicate: (config: WebpackConfiguration) => WebpackConfiguration): WebpackConfiguration {
+  const config: WebpackConfiguration = {
     name: 'webpack-electron',
-    target: `electron-${target}`,
     // mode, // 실서비스는 production
     // devtool, // 실서비스는 hidden-source-map
     mode: IS_DEV ? 'development' : 'production',
@@ -15,11 +14,10 @@ function createConfig(target: string): WebpackConfiguration {
     resolve: {
       // import 구문에서 합쳐질 파일의 확장자를 붙여준다
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    },
-    // 합쳐질 파일의 시작점
-    // 파일이 서로 연결된경우 알아서 찾아준다
-    entry: {
-      [target]: path.resolve('src', `${target}.ts`)
+      // 경로 alias
+      alias: {
+        '@lib': path.resolve('src', 'lib')
+      },
     },
     // 하나로 합쳐실 출력 파일의 설정입니다
     output: {
@@ -39,6 +37,25 @@ function createConfig(target: string): WebpackConfiguration {
       }]
     }
   };
+
+  return predicate(config);
 }
 
-export default [createConfig('main'), createConfig('preload')];
+export default [
+  createConfig(config => ({
+    ...config,
+    target: 'electron-main',
+    // 합쳐질 파일의 시작점
+    // 파일이 서로 연결된경우 알아서 찾아준다
+    entry: {
+      main: path.resolve('src', 'main', 'index.ts')
+    }
+  })),
+  createConfig(config => ({
+    ...config,
+    target: 'electron-preload',
+    entry: {
+      preload: path.resolve('src', 'preload.ts')
+    }
+  }))
+];

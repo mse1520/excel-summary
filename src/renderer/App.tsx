@@ -13,6 +13,10 @@ html, body, #root {
   height: 100vh;
   background-color: rgb(20, 20, 20);
   color: whitesmoke;
+}
+#root {
+  padding: .5rem;
+  box-sizing: border-box;
 }`;
 
 function App() {
