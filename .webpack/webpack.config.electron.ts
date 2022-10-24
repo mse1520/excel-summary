@@ -6,7 +6,6 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 
 function createConfig(predicate: (config: WebpackConfiguration) => WebpackConfiguration): WebpackConfiguration {
   const config: WebpackConfiguration = {
-    name: 'webpack-electron',
     // mode, // 실서비스는 production
     // devtool, // 실서비스는 hidden-source-map
     mode: IS_DEV ? 'development' : 'production',
@@ -22,8 +21,7 @@ function createConfig(predicate: (config: WebpackConfiguration) => WebpackConfig
     // 하나로 합쳐실 출력 파일의 설정입니다
     output: {
       path: path.resolve('dist'),
-      filename: '[name].js',
-      clean: IS_DEV ? true : false,
+      filename: '[name].js'
     },
     // loader 설정
     module: {
@@ -44,18 +42,26 @@ function createConfig(predicate: (config: WebpackConfiguration) => WebpackConfig
 export default [
   createConfig(config => ({
     ...config,
+    name: 'webpack-preload',
+    target: 'electron-preload',
+    entry: {
+      preload: path.resolve('src', 'preload.ts')
+    },
+    output: {
+      ...config.output,
+      clean: IS_DEV ? true : false,
+    }
+  })),
+  createConfig(config => ({
+    ...config,
+    name: 'webpack-main',
     target: 'electron-main',
+    // 웹팩 멀티 설정시 먼저 실행되어야할 종속성을 설정합니다
+    dependencies: ['webpack-preload'],
     // 합쳐질 파일의 시작점
     // 파일이 서로 연결된경우 알아서 찾아준다
     entry: {
       main: path.resolve('src', 'main', 'index.ts')
     }
   })),
-  createConfig(config => ({
-    ...config,
-    target: 'electron-preload',
-    entry: {
-      preload: path.resolve('src', 'preload.ts')
-    }
-  }))
 ];

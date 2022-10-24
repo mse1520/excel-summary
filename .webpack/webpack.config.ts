@@ -33,8 +33,7 @@ const config: WebpackConfig = {
   // 하나로 합쳐실 출력 파일의 설정입니다
   output: {
     path: path.resolve('dist'),
-    filename: '[name].js',
-    clean: IS_DEV ? true : false,
+    filename: '[name].js'
   },
   // loader 설정
   module: {
